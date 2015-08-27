@@ -20,6 +20,7 @@
         protected function tearDown()
         {
             Checkout::deleteAll();
+            Patron::deleteAll();
         }
 
         function test_save()
