@@ -237,44 +237,44 @@
             $this->assertEquals([$test_checkout], $result);
         }
 
-        // function test_getAllCheckouts()
-        // {
-        //     //Arrange
-        //     // create 2 test patrons.
-        //     $name = "Suzie Palloozi";
-        //     $phone = "1-800-439-0398";
-        //     $test_patron = new Patron($name, $phone);
-        //     $test_patron->save();
-        //
-        //     $name2 = "Tac Zoltani";
-        //     $phone2 = "1-800-407-3930";
-        //     $test_patron2 = new Patron($name2, $phone2);
-        //     $test_patron2->save();
-        //
-        //     // create 2 test checkouts. hard code copy_id for now
-        //     $copy_id = 1;
-        //     $patron_id = $test_patron->getId();
-        //     $due_date = "2015-03-04";
-        //     $test_checkout = new Checkout($copy_id, $patron_id, $due_date);
-        //     $test_checkout->save();
-        //
-        //     $copy_id2 = 2;
-        //     $due_date2 = "2011-03-04";
-        //     $patron_id2 = $test_patron->getId();
-        //     $test_checkout2 = new Checkout($copy_id2, $patron_id2, $due_date2);
-        //     $test_checkout2->save();
-        //
-        //
-        //     // Add both checkouts to patron
-        //     $test_patron->addCheckout($test_checkout);
-        //     $test_patron->addCheckout($test_checkout2);
-        //
-        //     //Act
-        //     $result = $test_patron->getCurrentCheckouts();
-        //
-        //     //Assert
-        //     $this->assertEquals([$test_checkout, $test_checkout2], $result);
-        // }
+        function test_getAllCheckouts()
+        {
+            //Arrange
+            // create 2 test patrons.
+            $name = "Suzie Palloozi";
+            $phone = "1-800-439-0398";
+            $test_patron = new Patron($name, $phone);
+            $test_patron->save();
+
+            $name2 = "Tac Zoltani";
+            $phone2 = "1-800-407-3930";
+            $test_patron2 = new Patron($name2, $phone2);
+            $test_patron2->save();
+
+            // create 2 test checkouts. hard code copy_id for now
+            $copy_id = 1;
+            $patron_id = $test_patron->getId();
+            $due_date = "2015-03-04";
+            $test_checkout = new Checkout($copy_id, $patron_id, $due_date);
+            $test_checkout->save();
+
+            $copy_id2 = 2;
+            $due_date2 = "2011-03-04";
+            $patron_id2 = $test_patron->getId();
+            $test_checkout2 = new Checkout($copy_id2, $patron_id2, $due_date2);
+            $test_checkout2->save();
+
+
+            // Add both checkouts to patron
+            $test_patron->addCheckout($test_checkout);
+            $test_patron->addCheckout($test_checkout2);
+
+            //Act
+            $result = $test_patron->getAllCheckouts();
+
+            //Assert
+            $this->assertEquals([$test_checkout, $test_checkout2], $result);
+        }
     }
 
  ?>
