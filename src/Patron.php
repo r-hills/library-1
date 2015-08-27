@@ -49,11 +49,13 @@
         function updateName($new_name)
         {
             $GLOBALS['DB']->exec("UPDATE patrons SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
         }
 
         function updatePhone($new_phone)
         {
             $GLOBALS['DB']->exec("UPDATE patrons SET phone = '{$new_phone}' WHERE id = {$this->getId()};");
+            $this->setPhone($new_phone);
         }
 
         function delete()
