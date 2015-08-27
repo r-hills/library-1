@@ -63,6 +63,22 @@
             $GLOBALS['DB']->exec("DELETE FROM patrons WHERE id = {$this->getId()};");
         }
 
+
+
+        // Methods dealing with checkouts
+        function addCheckout($new_checkout)
+        {
+
+        }
+
+        function getCheckouts()
+        {
+
+        }
+
+
+
+
         //static methods
         static function getAll()
         {
