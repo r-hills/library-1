@@ -68,10 +68,32 @@
         // Methods dealing with checkouts
         function addCheckout($new_checkout)
         {
-
+            $GLOBALS['DB']->exec("INSERT INTO checkouts (copy_id, patron_id, due_date) VALUES (
+                {$new_checkout->getCopyId()},
+                {$new_checkout->getPatronId()},
+                '{$new_checkout->getDueDate()}'
+            );");
         }
 
-        function getCheckouts()
+        function getCurrentCheckouts()
+        {
+            $checkouts_query = $GLOBALS['DB']->query("SELECT * FROM checkouts
+                WHERE patron_id = {$this->getId()} AND returned = 0;");
+
+            $current_checkouts = array();
+            foreach ($checkouts_query as $checkout) {
+                $copy_id = $checkout['copy_id'];
+                $patron_id = $checkout['patron_id'];
+                $due_date = $checkout['due_date'];
+                $returned = $checkout['returned'];
+                $id = $checkout['id'];
+                $new_checkout = new Checkout($copy_id, $patron_id, $due_date, $returned, $id);
+                array_push($current_checkouts, $new_checkout);
+            }
+            return $current_checkouts;
+        }
+
+        function getAllCheckouts()
         {
 
         }
