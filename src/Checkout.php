@@ -51,9 +51,10 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        function updateDueDate()
+        function updateDueDate($new_due_date)
         {
-
+            $GLOBALS['DB']->exec("UPDATE checkouts SET due_date = '{$new_due_date}' WHERE id = {$this->getId()};");
+            $this->setDueDate($new_due_date);
         }
 
         function delete()
