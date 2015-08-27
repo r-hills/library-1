@@ -193,5 +193,24 @@
             $this->assertEquals($test_checkout, $result[0]);
         }
 
+        function test_updateReturned()
+        {
+            //Arrange
+            $copy_id = 1;
+            $patron_id = 4;
+            $due_date = "2015-09-03";
+            $test_checkout = new Checkout($copy_id, $patron_id, $due_date);
+            $test_checkout->save();
+
+            //Act
+            $new_returned = true;
+            $test_checkout->updateReturned($new_due_date);
+
+            //Assert
+            $result = Checkout::getAll();
+            $this->assertEquals($new_returned, $result[0]->getReturned());
+        }
+
+
     }
  ?>
