@@ -1,0 +1,25 @@
+<html>
+<head>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <title>City Library</title>
+</head>
+<body>
+    <div class='container'>
+        <h1>Our Library</h1>
+
+        <h4>Our Library requires you to sign in if you are a lowly user</h4> 
+
+        <form action='/books' method='post'>
+            <label for='user_name'>New Course:</label>
+            <input id='user_name' name='user_name' type='text' required>
+
+            <br>
+
+            <button type='submit' class="btn btn-primary">Sign In</button>
+        </form>
+
+        <p><a href='/lib/books'>Click here if you're a Librarian, or would like to be one!</a></p>
+
+    </div>
+</body>
+</html>
