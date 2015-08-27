@@ -4,13 +4,16 @@
         private $copy_id;
         private $patron_id;
         private $due_date;
+        private $returned;
         private $id;
 
-        function __construct($copy_id, $patron_id, $due_date, $id = null)
+
+        function __construct($copy_id, $patron_id, $due_date, $returned = false, $id = null)
         {
             $this->copy_id = (int) $copy_id;
             $this->patron_id = (int) $patron_id;
             $this->due_date = $due_date;
+            $this->returned = (int) $returned;
             $this->id = $id;
         }
 
@@ -35,6 +38,16 @@
             $this->due_date = $new_due_date;
         }
 
+        function getReturned()
+        {
+            return $this->returned;
+        }
+
+        function setReturned($new_returned)
+        {
+            $this-$returned = (int) $new_returned;
+        }
+
         function getId()
         {
             return $this->id;
@@ -43,10 +56,11 @@
         //database methods
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO checkouts (copy_id, patron_id, due_date) VALUES (
+            $GLOBALS['DB']->exec("INSERT INTO checkouts (copy_id, patron_id, due_date, returned) VALUES (
                 {$this->getCopyId()},
                 {$this->getPatronId()},
-                '{$this->getDueDate()}');"
+                '{$this->getDueDate()}',
+                {$this->getReturned()});"
             );
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
@@ -72,8 +86,9 @@
                 $copy_id = $checkout['copy_id'];
                 $patron_id = $checkout['patron_id'];
                 $due_date = $checkout['due_date'];
+                $returned = $checkout['returned'];
                 $id = $checkout['id'];
-                $new_checkout = new Checkout($copy_id, $patron_id, $due_date, $id);
+                $new_checkout = new Checkout($copy_id, $patron_id, $due_date, $returned, $id);
                 array_push($all_checkouts, $new_checkout);
             }
             return $all_checkouts;
