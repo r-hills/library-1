@@ -8,8 +8,8 @@
 
         function __construct($copy_id, $patron_id, $due_date, $id = null)
         {
-            $this->copy_id = $copy_id;
-            $this->patron_id = $patron_id;
+            $this->copy_id = (int) $copy_id;
+            $this->patron_id = (int) $patron_id;
             $this->due_date = $due_date;
             $this->id = $id;
         }
@@ -43,7 +43,11 @@
         //database methods
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO checkouts (copy_id, patron_id, due_date) VALUES ({$this->getCopyId()}, {$this->getPatronId()}, '{$this->getDueDate()}');");
+            $GLOBALS['DB']->exec("INSERT INTO checkouts (copy_id, patron_id, due_date) VALUES (
+                {$this->getCopyId()},
+                {$this->getPatronId()},
+                '{$this->getDueDate()}');"
+            );
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -53,12 +57,6 @@
         }
 
         function delete()
-        {
-
-        }
-
-        // get list of all patrons that have checked out books
-        function getPatrons()
         {
 
         }
@@ -82,7 +80,7 @@
 
         static function deleteAll()
         {
-            $GLOBAL['DB']->exec("DELETE FROM checkouts;");
+            $GLOBALS['DB']->exec("DELETE FROM checkouts;");
         }
 
         static function find()
