@@ -59,7 +59,7 @@
 
         function delete()
         {
-
+            $GLOBALS['DB']->exec("DELETE FROM checkouts WHERE id = {$this->getId()};");
         }
 
         //static methods
