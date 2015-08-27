@@ -45,7 +45,7 @@
 
         function setReturned($new_returned)
         {
-            $this-$returned = (int) $new_returned;
+            $this->returned = (int) $new_returned;
         }
 
         function getId()
@@ -73,7 +73,8 @@
 
         function updateReturned($new_returned)
         {
-
+            $GLOBALS['DB']->exec("UPDATE checkouts SET returned = {$new_returned} WHERE id = {$this->getId()};");
+            $this->setReturned($new_returned);
         }
 
         function delete()

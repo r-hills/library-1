@@ -204,7 +204,7 @@
 
             //Act
             $new_returned = true;
-            $test_checkout->updateReturned($new_due_date);
+            $test_checkout->updateReturned($new_returned);
 
             //Assert
             $result = Checkout::getAll();
