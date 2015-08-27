@@ -51,7 +51,7 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        function update()
+        function updateDueDate()
         {
 
         }
