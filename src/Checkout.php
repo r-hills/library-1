@@ -84,9 +84,16 @@
             $GLOBALS['DB']->exec("DELETE FROM checkouts;");
         }
 
-        static function find()
+        static function find($search_id)
         {
-
+            $found_checkout = null;
+            $all_checkouts = Checkout::getAll();
+            foreach($all_checkouts as $checkout) {
+                if($checkout->getId() == $search_id) {
+                    $found_checkout = $checkout;
+                }
+            }
+            return $found_checkout;
         }
 
 
