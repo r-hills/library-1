@@ -94,6 +94,25 @@
             return $all_checkouts;
         }
 
+        static function getOverdue()
+        {
+            // Move to app
+            date_default_timezone_set("America/Los_Angeles");
+            $current_date = gmdate("Y-m-d");
+            $checkouts_query = $GLOBALS['DB']->query("SELECT * FROM checkouts WHERE due_date < '{$current_date}';");
+            $all_checkouts = array();
+            foreach ($checkouts_query as $checkout) {
+                $copy_id = $checkout['copy_id'];
+                $patron_id = $checkout['patron_id'];
+                $due_date = $checkout['due_date'];
+                $returned = $checkout['returned'];
+                $id = $checkout['id'];
+                $new_checkout = new Checkout($copy_id, $patron_id, $due_date, $returned, $id);
+                array_push($all_checkouts, $new_checkout);
+            }
+            return $all_checkouts;
+        }
+
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM checkouts;");
@@ -110,8 +129,6 @@
             }
             return $found_checkout;
         }
-
-
 
 
 
