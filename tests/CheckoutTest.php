@@ -8,7 +8,7 @@
     require_once "src/Checkout.php";
     // require_once "src/Author.php";
     // require_once "src/Book.php";
-    // require_once "src/Patron.php";
+    require_once "src/Patron.php";
 
     $server = 'mysql:host=localhost;dbname=library_test';
     $username = 'root';
@@ -168,6 +168,29 @@
 
             //Assert
             $this->assertEquals([$test_checkout2], $result);
+        }
+
+        function test_saveWithPatron()
+        {
+            //Arrange
+            // Create a Patron
+            $name = "Suzie";
+            $phone = "1-800-342-0909";
+            $test_patron = new Patron($name, $phone);
+            $test_patron->save();
+
+            // Create a Checkout with the new Patron
+            $copy_id = 1;
+            $patron_id = $test_patron->getId();
+            $due_date = "2015-09-03";
+            $test_checkout = new Checkout($copy_id, $patron_id, $due_date);
+
+            //Act
+            $test_checkout->save();
+
+            //Assert
+            $result = Checkout::getAll();
+            $this->assertEquals($test_checkout, $result[0]);
         }
 
     }

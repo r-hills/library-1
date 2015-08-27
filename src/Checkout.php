@@ -100,7 +100,7 @@
             date_default_timezone_set("America/Los_Angeles");
             $current_date = gmdate("Y-m-d");
             $checkouts_query = $GLOBALS['DB']->query("SELECT * FROM checkouts WHERE due_date < '{$current_date}';");
-            $all_checkouts = array();
+            $overdue_checkouts = array();
             foreach ($checkouts_query as $checkout) {
                 $copy_id = $checkout['copy_id'];
                 $patron_id = $checkout['patron_id'];
@@ -108,9 +108,9 @@
                 $returned = $checkout['returned'];
                 $id = $checkout['id'];
                 $new_checkout = new Checkout($copy_id, $patron_id, $due_date, $returned, $id);
-                array_push($all_checkouts, $new_checkout);
+                array_push($overdue_checkouts, $new_checkout);
             }
-            return $all_checkouts;
+            return $overdue_checkouts;
         }
 
         static function deleteAll()
