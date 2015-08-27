@@ -147,5 +147,27 @@
             $this->assertEquals($test_checkout2, $result);
         }
 
+        function test_getOverdue()
+        {
+            //Arrange
+            $copy_id = 1;
+            $patron_id = 4;
+            $due_date = "2015-10-05";
+            $test_checkout = new Checkout($copy_id, $patron_id, $due_date);
+            $test_checkout->save();
+
+            $copy_id2 = 2;
+            $patron_id2 = 1;
+            $due_date2 = "2014-01-03";
+            $test_checkout2 = new Checkout($copy_id2, $patron_id2, $due_date2);
+            $test_checkout2->save();
+
+            //Act
+            $result = Checkout::getOverdue();
+
+            //Assert
+            $this->assertEquals([$test_checkout2], $result);
+        }
+
     }
  ?>
