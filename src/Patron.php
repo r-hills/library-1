@@ -45,9 +45,20 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        function update($column_to_update, $new_info)
+        // Original function
+        // function update($column_to_update, $new_info)
+        // {
+        //     $GLOBALS['DB']->exec("UPDATE patrons SET {$column_to_update} = '{$new_info}' WHERE id = {$this->getId()};");
+        // }
+
+        function updateName($new_name)
         {
-            $GLOBALS['DB']->exec("UPDATE patrons SET {$column_to_update} = '{$new_info}' WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE patrons SET name = '{$new_name}' WHERE id = {$this->getId()};");
+        }
+
+        function updatePhone($new_phone)
+        {
+            $GLOBALS['DB']->exec("UPDATE patrons SET phone = '{$new_phone}' WHERE id = {$this->getId()};");
         }
 
         function delete()

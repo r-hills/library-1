@@ -118,15 +118,15 @@
             $test_patron = new Patron($name, $phone);
             $test_patron->save();
 
-            $column_to_update = "name";
-            $new_info = "Suzie P";
+            // $column_to_update = "name";
+            $new_name = "Suzie Q";
 
             //Act
-            $test_patron->update($column_to_update, $new_info);
+            $test_patron->updateName($new_name);
 
             //Assert
             $result = Patron::getAll();
-            $this->assertEquals("Suzie P", $result[0]->getName());
+            $this->assertEquals("Suzie Q", $result[0]->getName());
         }
 
         // test that same update method is working for phone
@@ -138,11 +138,10 @@
             $test_patron = new Patron($name, $phone);
             $test_patron->save();
 
-            $column_to_update = "phone";
-            $new_info = "570-943-0483";
+            $new_phone = "570-943-0483";
 
             //Act
-            $test_patron->update($column_to_update, $new_info);
+            $test_patron->updatePhone($new_phone);
 
             //Assert
             $result = Patron::getAll();
