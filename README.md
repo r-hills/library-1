@@ -2,7 +2,7 @@
 
 ##### Dynamic library website in MySQL, _08/27/15_
 
-#### By _**Ashlin Aronin**_
+#### By _**Rick Hills**_
 
 ## Description
 
